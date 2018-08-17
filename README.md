@@ -34,3 +34,17 @@ def customer_params
   { user: current_user, stripe_token: params[:token] }
 end
 ```
+
+### Deleting a Stripe Customer
+
+To remove payment information from your user, run the appropriate delete service
+
+Inside your controller, add:
+```ruby
+def destroy
+  CashOut::Payments::Customer::Delete.run(user: current_user)
+end
+```
+
+Note: This currently does not delete the payment information from Stripe. Support
+for this will be added in a future release.

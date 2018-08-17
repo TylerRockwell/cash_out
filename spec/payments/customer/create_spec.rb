@@ -33,7 +33,7 @@ RSpec.describe CashOut::Payments::Customer::Create do
 
       it_behaves_like "an invalid service run with errors",
                       [:stripe],
-                      "There was a problem with your card."
+                      I18n.t('cash_out.customer.invalid_card')
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe CashOut::Payments::Customer::Create do
 
       it_behaves_like "an invalid service run with errors",
                       [:stripe],
-                      "Account already exists"
+                      I18n.t('cash_out.customer.account_already_exists')
     end
   end
 end

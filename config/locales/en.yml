@@ -1,0 +1,9 @@
+en:
+  cash_out:
+    customer:
+      account_already_exists: "User already has a Stripe account"
+      invalid_card: "The card entered is not valid"
+    service:
+      success: "Success!"
+      failure: "Failure"
+

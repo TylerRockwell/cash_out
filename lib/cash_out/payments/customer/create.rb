@@ -5,7 +5,7 @@ module CashOut
         interface :user, methods: [:stripe_id]
         string :stripe_token, default: nil
 
-        validate :no_existing_stripe_customer
+        validate :customer_is_nil
 
         def execute
           customer = create_stripe_customer
@@ -17,19 +17,19 @@ module CashOut
 
         def create_stripe_customer
           Stripe::Customer.create(source: stripe_token)
-        rescue Stripe::InvalidRequestError,
-               Stripe::AuthenticationError,
-               Stripe::APIConnectionError,
-               Stripe::StripeError => e
+
+        rescue *STRIPE_ERRORS => e
           if e.class == Stripe::CardError
-            errors.add(:stripe, "There was a problem with your card.")
+            errors.add(:stripe, I18n.t('cash_out.customer.invalid_card'))
           else
             errors.add(:stripe, e.to_s)
           end
         end
 
-        def no_existing_stripe_customer
-          errors.add(:stripe, "Account already exists") if user.stripe_id.present?
+        def customer_is_nil
+          unless user.stripe_id.blank?
+            errors.add(:stripe, I18n.t('cash_out.customer.account_already_exists'))
+          end
         end
       end
     end

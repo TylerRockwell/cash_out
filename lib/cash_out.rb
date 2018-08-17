@@ -6,6 +6,7 @@ require 'stripe'
 require 'cash_out/base'
 require 'cash_out/service_base'
 require 'cash_out/payments/customer/create'
+require 'cash_out/payments/customer/delete'
 
 module CashOut
   extend self
@@ -28,3 +29,5 @@ end
 
 require 'generators/cash_out/templates/cash_out_config'
 require 'generators/cash_out/install_generator'
+
+I18n.load_path += Dir['config/locales/en.yml']
