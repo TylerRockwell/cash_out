@@ -25,9 +25,14 @@ module CashOut
     yield(configuration)
     Stripe.api_key = configuration.stripe_secret_key
   end
+
+  def root
+    File.dirname __dir__
+  end
 end
+
+translation_path = [File.join(CashOut.root, 'config', 'locales', 'en.yml')]
+I18n.load_path += translation_path
 
 require 'generators/cash_out/templates/cash_out_config'
 require 'generators/cash_out/install_generator'
-
-I18n.load_path += Dir['config/locales/en.yml']
