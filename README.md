@@ -6,6 +6,18 @@ with Stripe payments.
 This gem is targeted at API development and assumes your frontend is able to generate
 and send tokenized payment data to your endpoints.
 
+## Contents
+1. [Installation](#installation)
+1. [Configuration](#configuration)
+1. [Usage](#usage)
+    1. [Creating a Stripe Customer](#creating-a-stripe-customer)
+    1. [Deleting a Stripe Customer](#deleting-a-stripe-customer)
+    1. [Creating a Charge](#creating-a-charge)
+        1. [Without a Payout](#without-a-payout)
+        1. [With a Payout](#with-a-payout)
+    1. [Creating a Transfer](#creating-a-transfer)
+
+
 ## Installation
 
 1. Add `gem cash_out` to your Gemfile
@@ -57,8 +69,8 @@ def destroy
 end
 ```
 
-Note: This currently does not delete the payment information from Stripe. Support
-for this will be added in a future release.
+Note: This currently deletes the entire Customer account. Support for deleting
+individual cards will be added in a future release.
 
 ### Creating a Charge
 
@@ -112,7 +124,7 @@ In the case of a positive payout, the user will receive the `amount_to_payout` i
 For negative payouts, the `amount_to_payout` will be transfered from the user to the platform (business owned)
 Stripe account.
 
-### Creating a standalone Transfer
+### Creating a Transfer
 CashOut attempts to handle transfers automatically. However, should the case arise that you need to create
 one manually, you can do so with the following.
 
