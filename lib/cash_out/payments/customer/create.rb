@@ -2,7 +2,7 @@ module CashOut
   module Payments
     module Customer
       class Create < ::CashOut::ServiceBase
-        interface :user, methods: [:stripe_id]
+        interface :user, methods: %i(stripe_id valid? save)
         string :stripe_token, default: nil
 
         validate :customer_is_nil

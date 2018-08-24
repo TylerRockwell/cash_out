@@ -1,10 +1,18 @@
 # frozen_string_literal: true
+# Config
 require 'cash_out/configuration'
 
+# External dependencies
 require 'active_interaction'
 require 'stripe'
+
+# Core Files
 require 'cash_out/base'
 require 'cash_out/service_base'
+
+# Other Services
+require 'cash_out/charge/create'
+require 'cash_out/connect/transfer/create'
 require 'cash_out/payments/customer/create'
 require 'cash_out/payments/customer/delete'
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cash_out (0.0.1)
+    cash_out (0.0.3)
       active_interaction (~> 3.6)
       railties (< 6.0)
       stripe (~> 3.21)
