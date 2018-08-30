@@ -1,5 +1,8 @@
 en:
   cash_out:
+    connect:
+      is_required: "is required"
+      account_already_exists: "User already has a Stripe account"
     charge:
       invalid_charge_amount: "The charge amount must be a positive integer"
     customer:

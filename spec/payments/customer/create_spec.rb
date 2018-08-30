@@ -18,18 +18,15 @@ RSpec.describe CashOut::Payments::Customer::Create do
   end
 
   context "when account creation fails" do
-    before do
-      allow(Stripe::Customer).to receive(:create)
-        .and_raise(Stripe::InvalidRequestError.new("Bad things", ""))
+    context "when the request is invalid" do
+      let(:error) { Stripe::InvalidRequestError.new("Bad things", "") }
+      before { StripeMock.prepare_error(error, :new_customer) }
+
+      it_behaves_like "an invalid service run with errors", [:stripe], "Bad things"
     end
 
-    it_behaves_like "an invalid service run with errors", [:stripe], "Bad things"
-
     context "with card error" do
-      before do
-        allow(Stripe::Customer).to receive(:create)
-          .and_raise(Stripe::CardError.new("Your cvv is wrong!", "", ""))
-      end
+      before { StripeMock.prepare_card_error(:invalid_cvc, :new_customer) }
 
       it_behaves_like "an invalid service run with errors",
                       [:stripe],

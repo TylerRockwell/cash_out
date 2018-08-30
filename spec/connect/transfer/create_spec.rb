@@ -10,8 +10,7 @@ describe CashOut::Connect::Transfer::Create do
         amount: amount_to_payout.abs,
         currency: "usd",
         description: "",
-        destination: recipient,
-        transfer_group: ""
+        destination: recipient
       },
       {
         stripe_account: sender
@@ -55,11 +54,9 @@ describe CashOut::Connect::Transfer::Create do
   end
 
   context "Stripe error occurs" do
-    let(:failure_message) { { stripe: ["Bad things"] } }
-    before do
-      allow(Stripe::Transfer).to receive(:create)
-        .and_raise(Stripe::InvalidRequestError.new("Bad things", ""))
-    end
+    let(:error) { Stripe::InvalidRequestError.new("Bad things", "") }
+
+    before { StripeMock.prepare_error(error, :new_transfer) }
 
     it_behaves_like "an invalid service run with errors", [:stripe], "Bad things"
   end

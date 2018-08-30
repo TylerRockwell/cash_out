@@ -45,11 +45,7 @@ module CashOut
 
       def charge_payor(*args)
         Stripe::Charge.create(*args)
-      rescue Stripe::InvalidRequestError,
-             Stripe::AuthenticationError,
-             Stripe::APIConnectionError,
-             Stripe::CardError,
-             Stripe::StripeError => e
+      rescue *STRIPE_ERRORS => e
         errors.add(:stripe, e.to_s)
         e.json_body
       end
@@ -60,8 +56,7 @@ module CashOut
           amount: amount_to_charge,
           currency: "usd",
           description: "",
-          customer: payor.stripe_id,
-          transfer_group: ""
+          customer: payor.stripe_id
         }
       end
 

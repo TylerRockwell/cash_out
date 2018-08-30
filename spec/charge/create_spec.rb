@@ -31,8 +31,7 @@ describe CashOut::Charge::Create do
       amount: amount_to_charge,
       currency: "usd",
       description: "",
-      customer: payor.stripe_id,
-      transfer_group: ""
+      customer: payor.stripe_id
     }
   end
 

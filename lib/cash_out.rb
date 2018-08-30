@@ -12,6 +12,8 @@ require 'cash_out/service_base'
 
 # Other Services
 require 'cash_out/charge/create'
+require 'cash_out/connect/account/create'
+require 'cash_out/connect/account/delete'
 require 'cash_out/connect/transfer/create'
 require 'cash_out/payments/customer/create'
 require 'cash_out/payments/customer/delete'

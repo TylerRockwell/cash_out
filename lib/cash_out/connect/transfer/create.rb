@@ -13,10 +13,7 @@ module CashOut
 
         def initiate_transfer
           Stripe::Transfer.create(*params)
-        rescue Stripe::InvalidRequestError,
-               Stripe::AuthenticationError,
-               Stripe::APIConnectionError,
-               Stripe::StripeError => e
+        rescue *STRIPE_ERRORS => e
           errors.add(:stripe, e.to_s)
           e.json_body
         end
@@ -34,8 +31,7 @@ module CashOut
               amount: amount_to_payout.abs,
               currency: "usd",
               description: "",
-              destination: platform_stripe_account.id,
-              transfer_group: ""
+              destination: platform_stripe_account.id
             },
             {
               stripe_account: payee.stripe_id
@@ -52,8 +48,7 @@ module CashOut
               amount: amount_to_payout,
               currency: "usd",
               description: "",
-              destination: payee.stripe_id,
-              transfer_group: ""
+              destination: payee.stripe_id
             },
             {
               stripe_account: platform_stripe_account.id,
