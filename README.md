@@ -30,7 +30,7 @@ and send tokenized payment data to your endpoints.
 1. `rails generate cash_out:install`
 1. Update the items in `config/initializers/cash_out.rb` with your Stripe API keys.
 1. Create a migration to add a `stripe_id` (String) field to `User` or whichever model will hold the Stripe token.
-1. If using Stripe Connect (for making payouts), add `date_of_birth`(Date) to your `User` as well.
+1. If using Stripe Connect (for making payouts), add `date_of_birth`(Date), `first_name`, and `last_name` to your `User` as well.
 
 ## Configuration
 CashOut needs to be configured with your Stripe API keys. You can find the config file
