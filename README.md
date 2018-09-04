@@ -25,7 +25,7 @@ and send tokenized payment data to your endpoints.
 
 ## Installation
 
-1. Add `gem cash_out` to your Gemfile.
+1. Add `gem "cash_out"` to your Gemfile.
 1. `bundle install`
 1. `rails generate cash_out:install`
 1. Update the items in `config/initializers/cash_out.rb` with your Stripe API keys.
